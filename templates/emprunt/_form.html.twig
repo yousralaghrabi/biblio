@@ -1,0 +1,52 @@
+{{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': ''}}) }}
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            {{ form_label(form.dateemprunt, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.dateemprunt, {'attr': {
+                'class': 'form-control',
+                'required': (form.dateemprunt.vars.required ? 'required' : null),
+                'aria-required': (form.dateemprunt.vars.required ? 'true' : 'false'),
+                'aria-describedby': (form.dateemprunt.vars.errors|length ? form.dateemprunt.vars.id ~ '_errors' : null)
+            }}) }}
+            <div id="{{ form.dateemprunt.vars.id }}_errors" class="form-text text-danger" aria-live="polite">{{ form_errors(form.dateemprunt) }}</div>
+        </div>
+        <div class="col-md-6 mb-3">
+            {{ form_label(form.dateretourneprevue, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.dateretourneprevue, {'attr': {
+                'class': 'form-control',
+                'required': (form.dateretourneprevue.vars.required ? 'required' : null),
+                'aria-required': (form.dateretourneprevue.vars.required ? 'true' : 'false'),
+                'aria-describedby': (form.dateretourneprevue.vars.errors|length ? form.dateretourneprevue.vars.id ~ '_errors' : null)
+            }}) }}
+            <div id="{{ form.dateretourneprevue.vars.id }}_errors" class="form-text text-danger" aria-live="polite">{{ form_errors(form.dateretourneprevue) }}</div>
+        </div>
+        <div class="col-md-6 mb-3">
+            {{ form_label(form.dateretourneeffective, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.dateretourneeffective, {'attr': {
+                'class': 'form-control',
+                'required': (form.dateretourneeffective.vars.required ? 'required' : null),
+                'aria-required': (form.dateretourneeffective.vars.required ? 'true' : 'false'),
+                'aria-describedby': (form.dateretourneeffective.vars.errors|length ? form.dateretourneeffective.vars.id ~ '_errors' : null)
+            }}) }}
+            <div id="{{ form.dateretourneeffective.vars.id }}_errors" class="form-text text-danger" aria-live="polite">{{ form_errors(form.dateretourneeffective) }}</div>
+        </div>
+        <div class="col-md-6 mb-3">
+            {{ form_label(form.statut, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.statut, {'attr': {
+                'class': 'form-control',
+                'required': (form.statut.vars.required ? 'required' : null),
+                'aria-required': (form.statut.vars.required ? 'true' : 'false'),
+                'aria-describedby': (form.statut.vars.errors|length ? form.statut.vars.id ~ '_errors' : null)
+            }}) }}
+            <div id="{{ form.statut.vars.id }}_errors" class="form-text text-danger" aria-live="polite">{{ form_errors(form.statut) }}</div>
+        </div>
+    </div>
+    <div class="action-buttons mt-4">
+        <button type="submit" class="btn btn-warning btn-icon">
+            <i class="bi bi-check-circle"></i> {{ button_label|default('Save') }}
+        </button>
+        <a href="{{ path('app_emprunt_index') }}" class="btn btn-outline-secondary btn-icon">
+            <i class="bi bi-x-circle"></i> Cancel
+        </a>
+    </div>
+{{ form_end(form) }}

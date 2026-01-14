@@ -1,0 +1,56 @@
+{{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': ''}}) }}
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            {{ form_label(form.titre, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.titre, {
+                'attr': {
+                    'class': 'form-control',
+                    (form.titre.vars.required ? 'required' : ''): (form.titre.vars.required ? 'required' : null),
+                    'aria-required': (form.titre.vars.required ? 'true' : 'false'),
+                    'aria-describedby': (form.titre.vars.errors|length ? form.titre.vars.id ~ '_errors' : null)
+                }
+            }) }}
+            <div id="{{ form.titre.vars.id }}_errors" class="form-text text-danger" aria-live="polite">{{ form_errors(form.titre) }}</div>
+        </div>
+        <div class="col-md-6 mb-3">
+            {{ form_label(form.isbn, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.isbn, {
+                'attr': {
+                    'class': 'form-control',
+                    'placeholder': 'e.g., 978-0-123456-78-9',
+                    (form.isbn.vars.required ? 'required' : ''): (form.isbn.vars.required ? 'required' : null),
+                    'aria-required': (form.isbn.vars.required ? 'true' : 'false'),
+                    'aria-describedby': (form.isbn.vars.errors|length ? form.isbn.vars.id ~ '_errors' : null)
+                }
+            }) }}
+            <div id="{{ form.isbn.vars.id }}_errors" class="form-text text-danger" aria-live="polite">{{ form_errors(form.isbn) }}</div>
+        </div>
+        <div class="col-md-6 mb-3">
+            {{ form_label(form.datepublication, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.datepublication, {
+                'attr': {
+                    'class': 'form-control',
+                    (form.datepublication.vars.required ? 'required' : ''): (form.datepublication.vars.required ? 'required' : null),
+                    'aria-required': (form.datepublication.vars.required ? 'true' : 'false'),
+                    'aria-describedby': (form.datepublication.vars.errors|length ? form.datepublication.vars.id ~ '_errors' : null)
+                }
+            }) }}
+            <div id="{{ form.datepublication.vars.id }}_errors" class="form-text text-danger" aria-live="polite">{{ form_errors(form.datepublication) }}</div>
+        </div>
+        <div class="col-md-12 mb-3">
+            <div class="form-check form-switch">
+                {{ form_widget(form.disponible, {'attr': {'class': 'form-check-input', 'aria-describedby': (form.disponible.vars.errors|length ? form.disponible.vars.id ~ '_errors' : null)}}) }}
+                {{ form_label(form.disponible, null, {'label_attr': {'class': 'form-check-label'}}) }}
+            </div>
+            <div id="{{ form.disponible.vars.id }}_errors" class="form-text text-danger" aria-live="polite">{{ form_errors(form.disponible) }}</div>
+        </div>
+    </div>
+    <div class="action-buttons mt-4">
+        <button type="submit" class="btn btn-primary btn-icon">
+            <i class="bi bi-check-circle"></i> {{ button_label|default('Save') }}
+        </button>
+        <a href="{{ path('app_livre_index') }}" class="btn btn-outline-secondary btn-icon">
+            <i class="bi bi-x-circle"></i> Cancel
+        </a>
+    </div>
+{{ form_end(form) }}

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Loan{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="page-header">
+        <h1><i class="bi bi-pencil"></i> Edit Loan</h1>
+        <p class="subtitle">Update the loan information</p>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            {{ include('emprunt/_form.html.twig', {'button_label': 'Update Loan'}) }}
+        </div>
+        <div class="card-footer bg-light">
+            <div class="action-buttons">
+                {{ include('emprunt/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

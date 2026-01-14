@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ categorie.nom }}{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <a href="{{ path('app_categorie_index') }}" class="btn btn-outline-secondary btn-icon">
+            <i class="bi bi-arrow-left"></i> Back to List
+        </a>
+        <div class="action-buttons">
+            <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="btn btn-primary btn-icon">
+                <i class="bi bi-pencil"></i> Edit
+            </a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2 class="mb-0"><i class="bi bi-tags"></i> Category Details</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label text-muted">ID</label>
+                    <div class="fs-5"><strong>#{{ categorie.id }}</strong></div>
+                </div>
+                <div class="col-12 mb-3">
+                    <label class="form-label text-muted">Name</label>
+                    <div class="fs-4 fw-bold">{{ categorie.nom }}</div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label text-muted">Category Name</label>
+                    <div class="fs-5">{{ categorie.nomCategorie }}</div>
+                </div>
+                <div class="col-12 mb-3">
+                    <label class="form-label text-muted">Description</label>
+                    <div class="fs-5">
+                        {% if categorie.description %}
+                            <p>{{ categorie.description }}</p>
+                        {% else %}
+                            <span class="text-muted">No description available</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer bg-light">
+            <div class="action-buttons">
+                <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="btn btn-primary btn-icon">
+                    <i class="bi bi-pencil"></i> Edit Category
+                </a>
+                {{ include('categorie/_delete_form.html.twig') }}
+                <a href="{{ path('app_categorie_index') }}" class="btn btn-outline-secondary btn-icon">
+                    <i class="bi bi-arrow-left"></i> Back to List
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

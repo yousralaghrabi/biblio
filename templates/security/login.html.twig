@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+<div class="container auth-page">
+    <div class="row justify-content-center w-100">
+        <div class="col-12 col-md-10 col-lg-8">
+            <div class="card shadow-sm overflow-hidden auth-card">
+                <div class="row g-0">
+                    <div class="col-md-5 d-none d-md-flex auth-left align-items-center justify-content-center">
+                        <div class="p-4 text-center">
+                            <h3 class="mb-2">Welcome Back</h3>
+                            <p class="mb-0">Sign in to continue to the Mini App dashboard</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-7">
+                        <div class="p-4 p-md-5">
+                            <h2 class="h4 text-center mb-4">Sign in</h2>
+
+                            {% if error %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                                </div>
+                            {% endif %}
+
+                            {% for message in app.flashes('success') %}
+                                <div class="alert alert-success" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+
+                            <form method="post" action="{{ path('app_login') }}">
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                                <div class="mb-3">
+                                    <label for="inputUsername" class="form-label">Username or Email</label>
+                                    <input
+                                        type="text"
+                                        value="{{ last_username }}"
+                                        name="_username"
+                                        id="inputUsername"
+                                        class="form-control"
+                                        autocomplete="username"
+                                        required
+                                        autofocus
+                                        placeholder="you@example.com"
+                                    >
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputPassword" class="form-label">Password</label>
+                                    <div class="input-group">
+                                        <input
+                                            type="password"
+                                            name="_password"
+                                            id="inputPassword"
+                                            class="form-control"
+                                            autocomplete="current-password"
+                                            required
+                                            placeholder="Enter your password"
+                                        >
+                                        <button type="button" class="btn btn-outline-secondary" data-password-target="#inputPassword">Show</button>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="remember_me" name="_remember_me" value="on">
+                                        <label class="form-check-label" for="remember_me">Remember me</label>
+                                    </div>
+                                    <div>
+                                        <a href="#" class="small">Forgot password?</a>
+                                    </div>
+                                </div>
+
+                                <div class="d-grid mb-3">
+                                    <button class="btn btn-primary btn-lg" type="submit">Sign in</button>
+                                </div>
+                            </form>
+
+                            <div class="text-center">
+                                <p class="mb-0">Don't have an account? <a href="{{ path('app_register') }}">Create one</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card .form-control {
+        border-radius: 10px;
+        border: 1px solid #e9ecef;
+        padding: 0.75rem 0.9rem;
+    }
+    .btn-primary {
+        background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+        border: none;
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-weight: 600;
+    }
+    a { color: #667eea; }
+</style>
+{% endblock %}
+

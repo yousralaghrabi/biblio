@@ -1,0 +1,4 @@
+# Explicitly load controller attributes (#[Route])
+controllers_attributes:
+    resource: '../../src/Controller/'
+    type: attribute

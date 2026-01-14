@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Members{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="page-header">
+        <h1><i class="bi bi-people"></i> Members</h1>
+        <p class="subtitle">Manage library members</p>
+    </div>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle"></i> {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-circle"></i> {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <span class="badge bg-success">{{ adherents|length }} member(s)</span>
+        </div>
+        <a href="{{ path('app_adherent_new') }}" class="btn btn-success btn-icon">
+            <i class="bi bi-person-plus"></i> Add New Member
+        </a>
+    </div>
+
+    {% if adherents|length > 0 %}
+        <div class="table-container">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Registration Date</th>
+                            <th>Status</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for adherent in adherents %}
+                            <tr>
+                                <td><strong>#{{ adherent.id }}</strong></td>
+                                <td>
+                                    <strong>{{ adherent.prenom }} {{ adherent.nom }}</strong>
+                                </td>
+                                <td>
+                                    <i class="bi bi-envelope"></i> {{ adherent.email }}
+                                </td>
+                                <td>
+                                    <i class="bi bi-telephone"></i> {{ adherent.telephone }}
+                                </td>
+                                <td>
+                                    {% if adherent.dateinscription %}
+                                        <i class="bi bi-calendar"></i> {{ adherent.dateinscription }}
+                                    {% else %}
+                                        <span class="text-muted">N/A</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <span class="badge bg-primary">{{ adherent.statut }}</span>
+                                </td>
+                                <td class="text-end">
+                                    <div class="action-buttons">
+                                        <a href="{{ path('app_adherent_show', {'id': adherent.id}) }}" 
+                                           class="btn btn-sm btn-info btn-icon" 
+                                           title="View details">
+                                            <i class="bi bi-eye"></i> View
+                                        </a>
+                                        <a href="{{ path('app_adherent_edit', {'id': adherent.id}) }}" 
+                                           class="btn btn-sm btn-primary btn-icon" 
+                                           title="Edit member">
+                                            <i class="bi bi-pencil"></i> Edit
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% else %}
+        <div class="card">
+            <div class="card-body">
+                <div class="empty-state">
+                    <i class="bi bi-people"></i>
+                    <h3>No members found</h3>
+                    <p class="text-muted">Get started by adding your first member.</p>
+                    <a href="{{ path('app_adherent_new') }}" class="btn btn-success btn-icon mt-3">
+                        <i class="bi bi-person-plus"></i> Add Your First Member
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

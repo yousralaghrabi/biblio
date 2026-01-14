@@ -1,0 +1,319 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard - Library Management{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <!-- Page Header -->
+    <div class="page-header d-flex justify-content-between align-items-start">
+        <div>
+            <h1><i class="bi bi-speedometer2"></i> Dashboard</h1>
+            <p class="subtitle">Library Management System - Overview</p>
+        </div>
+        <div>
+            <form method="post" action="{{ path('app_logout') }}">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
+                <button type="submit" class="btn btn-outline-danger btn-sm">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="row g-4 mb-4">
+        <!-- Total Books -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card text-white" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-subtitle mb-2 text-white-50">Total Books</h6>
+                            <h2 class="mb-0">{{ totalLivres }}</h2>
+                            <small class="text-white-50">
+                                <i class="bi bi-check-circle"></i> {{ availableLivres }} available
+                            </small>
+                        </div>
+                        <div class="display-1 opacity-25">
+                            <i class="bi bi-book"></i>
+                        </div>
+                    </div>
+                    <a href="{{ path('app_livre_index') }}" class="btn btn-light btn-sm mt-3">
+                        <i class="bi bi-arrow-right"></i> Manage Books
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Members -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card text-white bg-success">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-subtitle mb-2 text-white-50">Total Members</h6>
+                            <h2 class="mb-0">{{ totalAdherents }}</h2>
+                        </div>
+                        <div class="display-1 opacity-25">
+                            <i class="bi bi-people"></i>
+                        </div>
+                    </div>
+                    <a href="{{ path('app_adherent_index') }}" class="btn btn-light btn-sm mt-3">
+                        <i class="bi bi-arrow-right"></i> Manage Members
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Authors -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card text-white bg-info">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-subtitle mb-2 text-white-50">Total Authors</h6>
+                            <h2 class="mb-0">{{ totalAuteurs }}</h2>
+                        </div>
+                        <div class="display-1 opacity-25">
+                            <i class="bi bi-person-badge"></i>
+                        </div>
+                    </div>
+                    <a href="{{ path('app_auteur_index') }}" class="btn btn-light btn-sm mt-3">
+                        <i class="bi bi-arrow-right"></i> Manage Authors
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Loans -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card text-white bg-warning">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-subtitle mb-2 text-white-50">Total Loans</h6>
+                            <h2 class="mb-0">{{ totalEmprunts }}</h2>
+                        </div>
+                        <div class="display-1 opacity-25">
+                            <i class="bi bi-bookmark-check"></i>
+                        </div>
+                    </div>
+                    <a href="{{ path('app_emprunt_index') }}" class="btn btn-light btn-sm mt-3">
+                        <i class="bi bi-arrow-right"></i> Manage Loans
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="bi bi-lightning-charge"></i> Quick Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <a href="{{ path('app_livre_new') }}" class="btn btn-primary w-100 btn-icon">
+                                <i class="bi bi-plus-circle"></i> Add Book
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="{{ path('app_adherent_new') }}" class="btn btn-success w-100 btn-icon">
+                                <i class="bi bi-person-plus"></i> Add Member
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="{{ path('app_emprunt_new') }}" class="btn btn-warning w-100 btn-icon">
+                                <i class="bi bi-bookmark-plus"></i> New Loan
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="{{ path('app_categorie_index') }}" class="btn btn-info w-100 btn-icon">
+                                <i class="bi bi-tags"></i> Categories
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Books and Loans -->
+    <div class="row">
+        <!-- Recent Books -->
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="bi bi-book"></i> Recent Books</h5>
+                    <a href="{{ path('app_livre_index') }}" class="btn btn-sm btn-outline-light">View All</a>
+                </div>
+                <div class="card-body p-0">
+                    {% if recentLivres|length > 0 %}
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>ISBN</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for livre in recentLivres %}
+                                        <tr>
+                                            <td><strong>{{ livre.titre }}</strong></td>
+                                            <td><code>{{ livre.isbn }}</code></td>
+                                            <td>
+                                                {% if livre.disponible %}
+                                                    <span class="badge bg-success">Available</span>
+                                                {% else %}
+                                                    <span class="badge bg-danger">Unavailable</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <a href="{{ path('app_livre_show', {'id': livre.id}) }}" 
+                                                   class="btn btn-sm btn-info btn-icon">
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="p-4 text-center text-muted">
+                            <i class="bi bi-inbox display-4 d-block mb-2"></i>
+                            No books found
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Loans -->
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="bi bi-bookmark-check"></i> Recent Loans</h5>
+                    <a href="{{ path('app_emprunt_index') }}" class="btn btn-sm btn-outline-light">View All</a>
+                </div>
+                <div class="card-body p-0">
+                    {% if recentEmprunts|length > 0 %}
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Loan Date</th>
+                                        <th>Return Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for emprunt in recentEmprunts %}
+                                        <tr>
+                                            <td>
+                                                {% if emprunt.dateemprunt %}
+                                                    {{ emprunt.dateemprunt|date('Y-m-d') }}
+                                                {% else %}
+                                                    N/A
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if emprunt.dateretourneprevue %}
+                                                    {{ emprunt.dateretourneprevue|date('Y-m-d') }}
+                                                {% else %}
+                                                    N/A
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-primary">{{ emprunt.statut }}</span>
+                                            </td>
+                                            <td>
+                                                <a href="{{ path('app_emprunt_show', {'id': emprunt.id}) }}" 
+                                                   class="btn btn-sm btn-info btn-icon">
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="p-4 text-center text-muted">
+                            <i class="bi bi-inbox display-4 d-block mb-2"></i>
+                            No loans found
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Management Links -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="bi bi-grid"></i> Library Management</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="p-3 border rounded">
+                                <h6><i class="bi bi-book text-primary"></i> Books Management</h6>
+                                <p class="text-muted small mb-2">Manage your book collection</p>
+                                <a href="{{ path('app_livre_index') }}" class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-arrow-right"></i> Go to Books
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 border rounded">
+                                <h6><i class="bi bi-people text-success"></i> Members Management</h6>
+                                <p class="text-muted small mb-2">Manage library members</p>
+                                <a href="{{ path('app_adherent_index') }}" class="btn btn-sm btn-outline-success">
+                                    <i class="bi bi-arrow-right"></i> Go to Members
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 border rounded">
+                                <h6><i class="bi bi-bookmark-check text-warning"></i> Loans Management</h6>
+                                <p class="text-muted small mb-2">Manage book loans</p>
+                                <a href="{{ path('app_emprunt_index') }}" class="btn btn-sm btn-outline-warning">
+                                    <i class="bi bi-arrow-right"></i> Go to Loans
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 border rounded">
+                                <h6><i class="bi bi-person-badge text-info"></i> Authors Management</h6>
+                                <p class="text-muted small mb-2">Manage book authors</p>
+                                <a href="{{ path('app_auteur_index') }}" class="btn btn-sm btn-outline-info">
+                                    <i class="bi bi-arrow-right"></i> Go to Authors
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 border rounded">
+                                <h6><i class="bi bi-tags text-secondary"></i> Categories Management</h6>
+                                <p class="text-muted small mb-2">Manage book categories</p>
+                                <a href="{{ path('app_categorie_index') }}" class="btn btn-sm btn-outline-secondary">
+                                    <i class="bi bi-arrow-right"></i> Go to Categories
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

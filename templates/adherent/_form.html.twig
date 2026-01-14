@@ -1,0 +1,83 @@
+{{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': ''}}) }}
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            {{ form_label(form.nom, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.nom, {'attr': {
+                'class': 'form-control',
+                'required': (form.nom.vars.required ? 'required' : null),
+                'aria-required': (form.nom.vars.required ? 'true' : 'false'),
+                'aria-describedby': (form.nom.vars.errors|length ? form.nom.vars.id ~ '_errors' : null)
+            }}) }}
+            <div id="{{ form.nom.vars.id }}_errors" class="form-text text-danger" aria-live="polite">{{ form_errors(form.nom) }}</div>
+        </div>
+        <div class="col-md-6 mb-3">
+            {{ form_label(form.prenom, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.prenom, {'attr': {
+                'class': 'form-control',
+                'required': (form.prenom.vars.required ? 'required' : null),
+                'aria-required': (form.prenom.vars.required ? 'true' : 'false'),
+                'aria-describedby': (form.prenom.vars.errors|length ? form.prenom.vars.id ~ '_errors' : null)
+            }}) }}
+            <div id="{{ form.prenom.vars.id }}_errors" class="form-text text-danger" aria-live="polite">{{ form_errors(form.prenom) }}</div>
+        </div>
+        <div class="col-md-6 mb-3">
+            {{ form_label(form.email, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.email, {'attr': {
+                'class': 'form-control',
+                'type': 'email',
+                'required': (form.email.vars.required ? 'required' : null),
+                'aria-required': (form.email.vars.required ? 'true' : 'false'),
+                'aria-describedby': (form.email.vars.errors|length ? form.email.vars.id ~ '_errors' : null)
+            }}) }}
+            <div id="{{ form.email.vars.id }}_errors" class="form-text text-danger" aria-live="polite">{{ form_errors(form.email) }}</div>
+        </div>
+        <div class="col-md-6 mb-3">
+            {{ form_label(form.telephone, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.telephone, {'attr': {
+                'class': 'form-control',
+                'required': (form.telephone.vars.required ? 'required' : null),
+                'aria-required': (form.telephone.vars.required ? 'true' : 'false'),
+                'aria-describedby': (form.telephone.vars.errors|length ? form.telephone.vars.id ~ '_errors' : null)
+            }}) }}
+            <div id="{{ form.telephone.vars.id }}_errors" class="form-text text-danger" aria-live="polite">{{ form_errors(form.telephone) }}</div>
+        </div>
+        <div class="col-md-6 mb-3">
+            {{ form_label(form.dateinscription, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.dateinscription, {'attr': {
+                'class': 'form-control',
+                'required': (form.dateinscription.vars.required ? 'required' : null),
+                'aria-required': (form.dateinscription.vars.required ? 'true' : 'false'),
+                'aria-describedby': (form.dateinscription.vars.errors|length ? form.dateinscription.vars.id ~ '_errors' : null)
+            }}) }}
+            <div id="{{ form.dateinscription.vars.id }}_errors" class="form-text text-danger" aria-live="polite">{{ form_errors(form.dateinscription) }}</div>
+        </div>
+        <div class="col-md-6 mb-3">
+            {{ form_label(form.datetimr, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.datetimr, {'attr': {
+                'class': 'form-control',
+                'required': (form.datetimr.vars.required ? 'required' : null),
+                'aria-required': (form.datetimr.vars.required ? 'true' : 'false'),
+                'aria-describedby': (form.datetimr.vars.errors|length ? form.datetimr.vars.id ~ '_errors' : null)
+            }}) }}
+            <div id="{{ form.datetimr.vars.id }}_errors" class="form-text text-danger" aria-live="polite">{{ form_errors(form.datetimr) }}</div>
+        </div>
+        <div class="col-md-12 mb-3">
+            {{ form_label(form.statut, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.statut, {'attr': {
+                'class': 'form-control',
+                'required': (form.statut.vars.required ? 'required' : null),
+                'aria-required': (form.statut.vars.required ? 'true' : 'false'),
+                'aria-describedby': (form.statut.vars.errors|length ? form.statut.vars.id ~ '_errors' : null)
+            }}) }}
+            <div id="{{ form.statut.vars.id }}_errors" class="form-text text-danger" aria-live="polite">{{ form_errors(form.statut) }}</div>
+        </div>
+    </div>
+    <div class="action-buttons mt-4">
+        <button type="submit" class="btn btn-success btn-icon">
+            <i class="bi bi-check-circle"></i> {{ button_label|default('Save') }}
+        </button>
+        <a href="{{ path('app_adherent_index') }}" class="btn btn-outline-secondary btn-icon">
+            <i class="bi bi-x-circle"></i> Cancel
+        </a>
+    </div>
+{{ form_end(form) }}

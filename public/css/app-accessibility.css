@@ -1,0 +1,50 @@
+/* Skip link accessibility and visual styles */
+.skip-link {
+    /* visually hidden off-screen but available to assistive tech */
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: opacity 180ms ease, transform 180ms ease;
+    opacity: 0;
+}
+
+/* Make the skip link visible on keyboard focus (and focus-visible) */
+.skip-link:focus,
+.skip-link:focus-visible {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 0.75rem;
+    background: #ffffff; /* light background so black icon is visible */
+    color: #000000; /* black text/icon for requested black icon */
+    z-index: 9999;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    text-decoration: none;
+    transform: translateY(0);
+    opacity: 1;
+    border: 2px solid #000000; /* high-contrast border */
+}
+
+/* Icon spacing for skip link */
+.skip-link i {
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    font-size: 1.1rem;
+    color: inherit; /* inherit black color when visible */
+}
+.skip-link .skip-link-text {
+    vertical-align: middle;
+}
+
+/* Visible focus outlines for keyboard users */
+:focus-visible {
+    outline: 3px solid #ffd54f;
+    outline-offset: 2px;
+}

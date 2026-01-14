@@ -1,3 +1,19 @@
+/.env
+/vendor/
+/var/
+/node_modules/
+/public/bundles/
+/.env.local
+/.idea/
+/.vscode/
+.DS_Store
+/.env.local.php
+
+# Composer
+/composer.lock
+
+# PHPUnit
+/phpunit.xml
 
 ###> symfony/framework-bundle ###
 /.env.local
@@ -8,3 +24,13 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+/.phpunit.cache/
+###< phpunit/phpunit ###
+
+###> symfony/asset-mapper ###
+/public/assets/
+/assets/vendor/
+###< symfony/asset-mapper ###

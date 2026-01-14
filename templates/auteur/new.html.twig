@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Author{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="page-header">
+        <h1><i class="bi bi-person-plus"></i> Add New Author</h1>
+        <p class="subtitle">Fill in the details to add a new author</p>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            {{ include('auteur/_form.html.twig', {'button_label': 'Create Author'}) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

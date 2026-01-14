@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+<div class="container auth-page">
+    <div class="row justify-content-center w-100">
+        <div class="col-12 col-md-10 col-lg-8">
+            <div class="card shadow-sm overflow-hidden auth-card">
+                <div class="row g-0">
+                    <div class="col-md-5 d-none d-md-flex auth-left align-items-center justify-content-center">
+                        <div class="p-4 text-center">
+                            <h3 class="mb-2">Join Mini App</h3>
+                            <p class="mb-0">Create your account to manage books and loans easily.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-7">
+                        <div class="p-4 p-md-5">
+                            <h2 class="h4 text-center mb-4">Create Account</h2>
+
+                            {% for flash_error in app.flashes('verify_email_error') %}
+                                <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                            {% endfor %}
+
+                            {% for flash_error in app.flashes('error') %}
+                                <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                            {% endfor %}
+
+                            {% for flash_message in app.flashes('success') %}
+                                <div class="alert alert-success" role="alert">{{ flash_message }}</div>
+                            {% endfor %}
+
+                            {{ form_start(registrationForm, {'attr': {'novalidate': 'novalidate'}}) }}
+                                <div class="mb-3">
+                                    {{ form_label(registrationForm.yousra_laghrabi) }}
+                                    {{ form_widget(registrationForm.yousra_laghrabi, {'attr': {'class': 'form-control', 'placeholder':'Your full name'}}) }}
+                                    {{ form_errors(registrationForm.yousra_laghrabi) }}
+                                </div>
+
+                                <div class="mb-3">
+                                    {{ form_label(registrationForm.plainPassword.first) }}
+                                    <div class="input-group">
+                                        {{ form_widget(registrationForm.plainPassword.first, {'attr': {'class':'form-control', 'id':'regPassword', 'placeholder':'Create a password'}}) }}
+                                        <button type="button" class="btn btn-outline-secondary" data-password-target="#regPassword">Show</button>
+                                    </div>
+                                    {{ form_errors(registrationForm.plainPassword.first) }}
+                                </div>
+
+                                <div class="mb-3">
+                                    {{ form_label(registrationForm.plainPassword.second) }}
+                                    {{ form_widget(registrationForm.plainPassword.second, {'attr': {'class':'form-control', 'placeholder':'Repeat password'}}) }}
+                                    {{ form_errors(registrationForm.plainPassword.second) }}
+                                </div>
+
+                                {% if registrationForm.plainPassword.vars.errors|length > 0 %}
+                                    <div class="alert alert-danger">
+                                        {{ form_errors(registrationForm.plainPassword) }}
+                                    </div>
+                                {% endif %}
+
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary btn-lg">Create account</button>
+                                </div>
+                            {{ form_end(registrationForm) }}
+
+                            <div class="text-center mt-3">
+                                <p class="mb-0">Already have an account? <a href="{{ path('app_login') }}">Login here</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card .form-control { border-radius:10px; }
+    .btn-primary { background: linear-gradient(135deg,#667eea 0%,#764ba2 100%); border:none; }
+</style>
+{% endblock %}
+

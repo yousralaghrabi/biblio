@@ -1,0 +1,43 @@
+{{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': ''}}) }}
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            {{ form_label(form.nom, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.nom, {'attr': {
+                'class': 'form-control',
+                'required': (form.nom.vars.required ? 'required' : null),
+                'aria-required': (form.nom.vars.required ? 'true' : 'false'),
+                'aria-describedby': (form.nom.vars.errors|length ? form.nom.vars.id ~ '_errors' : null)
+            }}) }}
+            <div id="{{ form.nom.vars.id }}_errors" class="form-text text-danger" aria-live="polite">{{ form_errors(form.nom) }}</div>
+        </div>
+        <div class="col-md-6 mb-3">
+            {{ form_label(form.nomCategorie, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.nomCategorie, {'attr': {
+                'class': 'form-control',
+                'required': (form.nomCategorie.vars.required ? 'required' : null),
+                'aria-required': (form.nomCategorie.vars.required ? 'true' : 'false'),
+                'aria-describedby': (form.nomCategorie.vars.errors|length ? form.nomCategorie.vars.id ~ '_errors' : null)
+            }}) }}
+            <div id="{{ form.nomCategorie.vars.id }}_errors" class="form-text text-danger" aria-live="polite">{{ form_errors(form.nomCategorie) }}</div>
+        </div>
+        <div class="col-12 mb-3">
+            {{ form_label(form.description, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.description, {'attr': {
+                'class': 'form-control',
+                'rows': 5,
+                'required': (form.description.vars.required ? 'required' : null),
+                'aria-required': (form.description.vars.required ? 'true' : 'false'),
+                'aria-describedby': (form.description.vars.errors|length ? form.description.vars.id ~ '_errors' : null)
+            }}) }}
+            <div id="{{ form.description.vars.id }}_errors" class="form-text text-danger" aria-live="polite">{{ form_errors(form.description) }}</div>
+        </div>
+    </div>
+    <div class="action-buttons mt-4">
+        <button type="submit" class="btn btn-secondary btn-icon">
+            <i class="bi bi-check-circle"></i> {{ button_label|default('Save') }}
+        </button>
+        <a href="{{ path('app_categorie_index') }}" class="btn btn-outline-secondary btn-icon">
+            <i class="bi bi-x-circle"></i> Cancel
+        </a>
+    </div>
+{{ form_end(form) }}
